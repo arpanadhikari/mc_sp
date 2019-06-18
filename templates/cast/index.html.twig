@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cast index{% endblock %}
+
+{% block body %}
+    <h1>Cast index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>FullName</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for cast in casts %}
+            <tr>
+                <td>{{ cast.id }}</td>
+                <td>{{ cast.fullName }}</td>
+                <td>
+                    <a href="{{ path('cast_show', {'id': cast.id}) }}">show</a>
+                    <a href="{{ path('cast_edit', {'id': cast.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="3">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('cast_new') }}">Create new</a>
+{% endblock %}

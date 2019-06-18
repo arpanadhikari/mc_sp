@@ -1,0 +1,26 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Cast{% endblock %}
+
+{% block body %}
+    <h1>Cast</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ cast.id }}</td>
+            </tr>
+            <tr>
+                <th>FullName</th>
+                <td>{{ cast.fullName }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('cast_index') }}">back to list</a>
+
+    <a href="{{ path('cast_edit', {'id': cast.id}) }}">edit</a>
+
+    {{ include('cast/_delete_form.html.twig') }}
+{% endblock %}
