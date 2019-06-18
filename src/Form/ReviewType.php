@@ -18,11 +18,10 @@ class ReviewType extends AbstractType
             ->add('stars')
             ->add('movie',EntityType::class,[
                 'class' => Movie::class,
-                'choice_label' => 'title',
-                'multiple' =>'true'
+                'choice_label' => 'title'
             ])
         ;
-        $builder->get('movies')->setRequired(false);
+        $builder->get('movie')->setRequired(false);
     }
 
     public function configureOptions(OptionsResolver $resolver)

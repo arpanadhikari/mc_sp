@@ -3,10 +3,53 @@
     <head>
         <meta charset="UTF-8">
         <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+        {% block stylesheets %}
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+        {% endblock %}
     </head>
+    {% block header %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="/">Snappy Movies</a>
+    <ul class="navbar-nav mr-3">
+      <li class="nav-item   m-3">
+        <a class="nav-link" href="/movie">Movies Index</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-3">
+      <li class="nav-item   m-3">
+        <a class="nav-link" href="/cast">Cast Index</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-3">
+      <li class="nav-item   m-3">
+        <a class="nav-link" href="/director">Directors Index</a>
+      </li>
+    </ul>
+    <ul class="navbar-nav mr-3">
+      <li class="nav-item   m-3">
+        <a class="nav-link" href="/genre">Genre Index</a>
+      </li>
+    </ul>
+    </nav>
+    {% endblock %}
+
     <body>
         {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
+        {% block javascripts %}
+        <script src="https://code.jquery.com/jquery-3.4.1.js" integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU=" crossorigin="anonymous"></script>
+        {% endblock %}
     </body>
+
+       {% block footer %}
+    <!-- Footer -->
+<footer class="page-footer blue pt-4">
+
+  <!-- Footer Links -->
+  <div class="container-fluid text-center text-md-left navbar-dark bg-dark">
+
+
+</footer>
+<!-- Footer -->
+
+    {% endblock %}
 </html>
