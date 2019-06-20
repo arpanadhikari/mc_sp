@@ -10,5 +10,15 @@ $settings = {
     'url':$eventcinemasurl,
     'method':"GET"
 }
-$.ajax($settings);
+$.ajax({
+        url:'https://www.eventcinemas.com.au/movies/getnowshowing/',
+        method: 'GET',
+        headers:{
+            'Access-Control-Allow-Origin':'*'
+        },
+        success: function(response) {
+            console.log(response);
+        }
+})
+//$.ajax($settings);
 });

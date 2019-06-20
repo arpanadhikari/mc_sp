@@ -3,32 +3,59 @@
 {% block title %}Movie{% endblock %}
 
 {% block body %}
-    <h1>Movie</h1>
+    <h3 class="mt-5">{{movie.title}}
+    </h3>
+            {% set totalstars=0 %}
+            {% for review in movie.review %}{% set totalstars = totalstars + review.stars %}
+            {% endfor %}
+            <h5>{{ totalstars/movie.review|length }} stars rating.</h5>
 
-    <table class="table">
+    <table class="table table-striped mt-3">
         <tbody>
-            <tr>
-                <th>Id</th>
-                <td>{{ movie.id }}</td>
-            </tr>
             <tr>
                 <th>Title</th>
                 <td>{{ movie.title }}</td>
             </tr>
+            
+            <tr>
+                <th>Director</th>
+                <td><a href="../../director/{{movie.director.id}}">{{ movie.director.fullname }}</a></td>
+                </tr>
             <tr>
                 <th>ReleaseDate</th>
                 <td>{{ movie.releaseDate ? movie.releaseDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
+                <th>Genre</th>
+                    <td>{% for cast in movie.cast %} <a href="/cast/{{cast.id}}" class="btn btn-info p-0 text-light">{{cast.fullName}}</a> {% endfor %}</td>
+                </tr>
+            <tr>
                 <th>Revenue</th>
-                <td>{{ movie.revenue }}</td>
+                <td>${{ movie.revenue }}</td>
+            </tr>
+            <tr>
+                <th>Genre</th>
+                <td>{% for genre in movie.genre %} <a href="/genre/{{genre.id}}" class="btn btn-info p-0 text-light">{{genre.genre}}</a> {% endfor %}</td>
             </tr>
         </tbody>
     </table>
 
-    <a href="{{ path('movie_index') }}">back to list</a>
+    <a class="btn btn-primary" href="{{ path('movie_index') }}">back to list</a>
 
-    <a href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
+    <a class="btn btn-warning" href="{{ path('movie_edit', {'id': movie.id}) }}">edit</a>
 
-    {{ include('movie/_delete_form.html.twig') }}
+    <span class="btn btn-danger p-0">{{ include('movie/_delete_form.html.twig') }}</span>
+    <h5 class="mt-5">Reviews for this movie <a href="/movie/{{movie.id}}/rate" class="btn btn-secondary p-0"> Write a Review</a></h5> 
+    <div class="container-flex border bg-light">
+        <ul>
+                {% for review in movie.review %}
+                    <li><h6>{{ review.title }} ,{{review.stars}} stars.<a href="../../review/{{review.id}}/edit">✏</a></h6>
+                        <p>{{review.comment}}</p>
+
+                    </li>
+                {% endfor %}
+        </ul>
+
+    </div>
+
 {% endblock %}

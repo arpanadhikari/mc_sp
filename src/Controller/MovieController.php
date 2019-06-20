@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Movie;
+use App\Entity\Review;
 use App\Form\MovieType;
+use App\Form\MovieReviewType;
 use App\Repository\MovieRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -79,6 +81,31 @@ class MovieController extends AbstractController
             'form' => $form->createView(),
         ]);
     }
+    /**
+    * @Route("/{id}/rate", name="movie_rate", methods={"GET","POST"})
+    */
+    public function rate(Request $request, Movie $movie): Response
+    {
+        $review = new Review();
+        $review->setMovie($movie);
+        $form = $this->createForm(MovieReviewType::class, $review);
+        $form->handleRequest($request);
+        if ($form->isSubmitted() && $form->isValid()) {
+            $entityManager = $this->getDoctrine()->getManager();
+            $entityManager->persist($review);
+            $entityManager->flush();
+            return $this->redirectToRoute('movie_show', [
+                'id' => $movie->getId(),
+                ]);
+            }
+            //dd($request);
+
+        return $this->render('review/new.html.twig', [
+            'review' => $review,
+            'form' => $form->createView(),
+        ]);
+    }
+
 
     /**
      * @Route("/{id}", name="movie_delete", methods={"DELETE"})

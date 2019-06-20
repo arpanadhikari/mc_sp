@@ -28,7 +28,7 @@ class MovieType extends AbstractType
                 'choice_label'=>'fullName',
                 'multiple'=>'true'
             ])
-            ->add('genre',EntityType::cass,[
+            ->add('genre',EntityType::class,[
                 'class'=>Genre::class,
                 'choice_label'=>'genre',
                 'multiple'=>'true'
