@@ -39,6 +39,9 @@ While it's updating packages, open the .env file and enter the local database de
 
 * Once composer is done installing packages, run:
 ````
+    php bin/console doctrine:database:create
+    php bin/console make:migration
+    php bin/console doctrine:migration:migrate
     php bin/console server:run
 ````
 from the project folder.
