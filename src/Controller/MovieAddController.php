@@ -18,35 +18,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class MovieAddController extends AbstractController
 {
     /**
-     * @Route("/new", name="movie_ajax_add", methods={"GET","POST"})
+     * @Route("/search", name="movie_ajax_find", methods={"GET"})
      */
-    public function new(Request $request): Response
+    public function show(Request $request): Response
     {
-        $movie = new Movie();
-        $form = $this->createForm(MovieType::class, $movie);
-        $form->handleRequest($request);
-
-        if ($form->isSubmitted() && $form->isValid()) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($movie);
-            $entityManager->flush();
-
-            return $this->redirectToRoute('movie_ajax_add');
+        $keyword = $request->query->get("keyword");
+        if($keyword!="")
+        {
+            //dd($keyword[0]);
+            $response = file_get_contents("https://v2.sg.media-imdb.com/suggestion/" . $keyword[0] . "/" . $keyword . ".json");
+            return new Response($response);
         }
-
-        return $this->render('movie/new.html.twig', [
-            'movie' => $movie,
-            'form' => $form->createView(),
-        ]);
+        //dd($request->query->get("keyword"));
+        return new Response();
     }
-
     /**
-     * @Route("/{keyword}", name="movie_ajax_find", methods={"GET"})
+     * @Route("/add", name="movie_ajax_add", methods={"POST"})
      */
-    public function show(Movie $movie): Response
+    public function add(Request $request): Response
     {
-        return $this->render('movie/show.html.twig', [
-            'movie' => $movie,
-        ]);
+        //TODO: Add data to DB once route starts working.
+        return new Response();
     }
 }

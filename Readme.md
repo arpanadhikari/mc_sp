@@ -13,10 +13,3 @@
 
 ###note:
 *To make demonstration simpler, I've focused most of the features on the movie_show page. This page demonstrates most parts of the homework.*
-
-
-[links](https://wikipedia.org)
-
-----
-## thanks
-* [markdown-js](https://github.com/evilstreak/markdown-js)
