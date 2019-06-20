@@ -32,7 +32,8 @@
 * Install Git or download the code directly from [here](https://github.com/arpanadhikari/mc_sp/archive/master.zip)
 
 * Open Command Prompt and goto the project folder.
-````    composer require all
+````   
+    composer require all
 ````
 While it's updating packages, open the .env file and enter the local database details. Be sure to launch mysql server from XAMPP-Control Panel.
 
