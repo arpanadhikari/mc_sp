@@ -9,14 +9,21 @@
 4. Generate CRUD Controllers from the Entities. ✔
 5. Add a unique controller to demonstrate non-reliance on CRUD default functions. ✔
          A unique controller to write a review for the movie from any movie_show page. 
-6. Consume an existing API load the DB with movies. [Partly done.]
+6. Consume an existing API load the DB with movies.✔
 
 ###note:
 *To make demonstration simpler, I've focused most of the features on the movie_show page. This page demonstrates most parts of the homework.*
 
+## Test Scenario:
+*Search any movie from the main page. The page will update with search results at the bottom.
+*Hit Add to DB button for any movie result and wait for "Saved" or "Error" label on the button.
+*If button shows "Saved", you nowcan goto /movie and view the movie currently added. 
+*The cast, title and release date will be automatically added.
+*Cast are individual objects so you can click on the casts and view/edit them separately.
+
 ### Things I'm tackling at the moment.
 
-* Keep geting 404 error to existing route through AJAX. Route->*movie_ajax_add*
+* Keep geting 404 error to existing route through AJAX. Route->*movie_ajax_add* ==> FIXED
 
 
 ### Quickest Way to test this app.

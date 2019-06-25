@@ -6,9 +6,11 @@
     <h3 class="mt-5">{{movie.title}}
     </h3>
             {% set totalstars=0 %}
+            {% if movie.review|length > 0 %}
             {% for review in movie.review %}{% set totalstars = totalstars + review.stars %}
             {% endfor %}
             <h5>{{ totalstars/movie.review|length }} stars rating.</h5>
+            {% endif %}
 
     <table class="table table-striped mt-3">
         <tbody>
@@ -19,15 +21,20 @@
             
             <tr>
                 <th>Director</th>
-                <td><a href="../../director/{{movie.director.id}}">{{ movie.director.fullname }}</a></td>
+                <td>{%if movie.director is not null %}
+                    <a href="../../director/{{movie.director.id}}">{{ movie.director.fullname }}</a> {% endif %}
+                </td>
                 </tr>
             <tr>
                 <th>ReleaseDate</th>
                 <td>{{ movie.releaseDate ? movie.releaseDate|date('Y-m-d') : '' }}</td>
             </tr>
             <tr>
-                <th>Genre</th>
-                    <td>{% for cast in movie.cast %} <a href="/cast/{{cast.id}}" class="btn btn-info p-0 text-light">{{cast.fullName}}</a> {% endfor %}</td>
+                <th>Cast</th>
+                    <td>{%if movie.cast is defined %}
+                    {% for cast in movie.cast %} <a href="/cast/{{cast.id}}" class="btn btn-info p-0 text-light">{{cast.fullName}}</a> {% endfor %}
+                        {% endif %}
+                </td>
                 </tr>
             <tr>
                 <th>Revenue</th>
@@ -35,7 +42,10 @@
             </tr>
             <tr>
                 <th>Genre</th>
-                <td>{% for genre in movie.genre %} <a href="/genre/{{genre.id}}" class="btn btn-info p-0 text-light">{{genre.genre}}</a> {% endfor %}</td>
+                <td>{%if movie.genre is defined %}
+                {% for genre in movie.genre %} <a href="/genre/{{genre.id}}" class="btn btn-info p-0 text-light">{{genre.genre}}</a> {% endfor %}
+                {% endif %}
+                </td>
             </tr>
         </tbody>
     </table>

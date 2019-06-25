@@ -33,26 +33,34 @@ $.ajax({
 
 $('#search-result').on('click','.save-to-db-button',function(){
     console.log($(this).attr("name"));
-    $(this).html("Saving...")
-    $saveUrl = "http://localhost:8000/movie_ajax/add/"
+    var saveBtn = $(this);
+    saveBtn.html("Saving...")
+    $saveUrl = "http://localhost:8000/movie_ajax/add"
     $.ajax({
         url:$saveUrl,
         method:"POST",
         data:{
-            'title':$(this).attr("name"),
-            'releasedate':$(this).attr("released"),
-            'cast':$(this).attr("cast")
+            title:$(this).attr("name"),
+            releasedate:$(this).attr("released"),
+            cast:$(this).attr("cast")
         },
         headers:{
             'Access-Control-Allow-Origin':'*'
         },
         success:function(response)
         {
-            $(this).html("saved!");
+            console.log(response);
+            saveBtn.addClass("btn-success");
+            saveBtn.removeClass("btn-primary");
+            saveBtn.prop('disabled');
+            saveBtn.html("saved ✔");
         },
         error:function(response)
         {
-            $(this).html("error.");
+            console.log("error");
+            saveBtn.addClass("btn-error");
+            saveBtn.removeClass("btn-primary");
+           saveBtn.html("error. 🐞");
         }
     })
 });
